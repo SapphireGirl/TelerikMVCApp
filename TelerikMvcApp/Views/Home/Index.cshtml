@@ -1,0 +1,263 @@
+﻿@using Kendo.Mvc.UI
+@model TelerikMvcApp.ViewModels.CandidateViewModel
+
+
+<div id="mainContainer">
+    <div id="SearchRow" class="row k-block">
+
+
+        <div id ="AddCandidateBox" name="MainAddBox" class="SearchBox ui-corner-all col-xs-12 col-sm-12 col-md-12 col-lg-12 hide-horiz-scrollbar">
+            <div class="k-header">Add a Candidate</div>
+            <div id="SetFocus"></div>
+            @using (Html.BeginForm("AjaxCandidateSave", "Home", FormMethod.Post, new { id = "ajaxCandidateSave", enctype = "multipart/form-data" }))
+            {
+                @*@Html.ValidationSummary()*@
+                <div id="Row1" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="leftedge ">
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.TextBoxFor(m => m.FirstName)
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
+
+                </div>
+                <div id="Row2" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="leftedge">
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.TextBoxFor(m => m.LastName)
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                </div>
+                <div id="Row3" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="leftedge">
+                        @Html.LabelFor(m => m.Phone)
+                        @Html.TextBoxFor(m => m.Phone)
+                        @Html.ValidationMessageFor(m => m.Phone)
+                    </div>
+                </div>
+                <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="leftedge">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                </div>
+                <div id="Row5" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+                    &nbsp;&nbsp;&nbsp; Qualifications:
+
+                    <div class="leftedge">
+                        @(Html.Kendo().DropDownListFor(m => m.TypeOfQualifications)
+                                  .DataTextField("Text")
+                                  .DataValueField("Value")
+                                  .DataSource(d => d.Read("GetTypesOfQualifications", "Home"))
+                                  .OptionLabel("Please Select")
+
+                        )
+                    </div>
+                    <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="leftedge">Start Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.TextBoxFor(m => m.Qualification.DateStarted)</div>
+                    </div>
+                    <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="leftedge">End Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.TextBoxFor(m => m.Qualification.DateEnded)</div>
+                    </div>
+                    <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="leftedge">
+                            Was this Completed? True: @Html.RadioButtonFor(m => m.Qualification.isCompleted, true, new { @class = "k-checkbox" })
+                            False:     @Html.RadioButtonFor(m => m.Qualification.isCompleted, false, new { @class = "k-checkbox" })
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- End of Row5-->
+
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <button id="candidateSubmit" type="submit" class="pull-right k-button" onclick="AjaxAddCandidate()">Add/Update</button>
+                    </div>
+                </div>
+            }
+    </div> <!-- End of Search Box-->
+</div> <!-- End of Search Row-->
+
+
+<div id="SearchInfo" class="row k-block">
+    <div class="SearchBox ui-corner-all col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="k-header">Search for a Candidate</div>
+        <div id="Row1" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            @*<div class="leftedge ">
+                First Name: &nbsp;&nbsp;<input id="searchCandidateFN" type="text" />
+            </div>*@
+
+        </div>
+        <div id="Row2" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="leftedge ">
+                <div>
+                    Search By First or Last Name:
+                    <input class=k-textbox type=text id="searchCandidateFN" placeholder="enter search text..." />
+                    <button id="btnSearch">Search</button>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id ="grid" class="row k-block">
+    <div class="SearchBox ui-corner-all col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        @(Html.Kendo().Grid<TelerikMvcApp.ViewModels.CandidateViewModel>()
+                  .Name("CandidateGrid")
+                  .Columns(columns =>
+                  {
+                      columns.Bound(c => c.Id).Visible(false);
+                      columns.Bound(c => c.FirstName).Width(30);
+                      columns.Bound(c => c.LastName).Width(30);
+                      columns.Bound(c => c.Phone).Width(20);
+                      // columns.Bound(c => c.Address.City).Width(25);
+                      columns.Bound(c => c.Email).Width(110);
+                  })
+                  .HtmlAttributes(new { style = "height: 380px;" })
+                  .Scrollable()
+                  .Groupable()
+                  .Sortable()
+                  .Selectable(selectable => selectable
+                                .Mode(GridSelectionMode.Single)
+                                .Type(GridSelectionType.Row))
+                // .Events(events => events.Change("onChange"))
+                  .Pageable(pageable => pageable
+                      .Refresh(true)
+                      .PageSizes(true)
+                      .ButtonCount(4))
+                  .DataSource(dataSource => dataSource
+                      .Ajax()
+                      .ServerOperation(true)
+                      .Batch(false)
+                      .Model(model =>
+                      {
+                          model.Id(x => x.Id);
+                          model.Field(x => x.FirstName).DefaultValue(string.Empty);
+                          model.Field(x => x.LastName).DefaultValue(string.Empty);
+                          model.Field(x => x.Address.City).DefaultValue(string.Empty);
+                          model.Field(x => x.Email).DefaultValue(string.Empty);
+                      })
+                      .Read(read => read.Action("CandidatesRead", "Home"))
+                      .Update(update => update.Action("UpdateCandidateGrid", "Home"))
+
+                  )
+        )
+    </div>
+    </div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        // This function will update the grid with the new candidate
+        $(function () {
+            onReady();
+
+
+        });
+
+
+
+
+        function GetCandidateInfoFromGrid(id) {
+            var data = $('#CandidateGrid').data('kendoGrid').dataSource.data();
+
+            var existing = null;
+            for (var i = 0; i < data.length; i++) {
+
+            }
+        }
+
+
+        function AjaxAddCandidate() {
+
+            $.ajax({
+                method: 'POST',
+                url: '/Home/AjaxCandidateSave',
+                async: false,
+                data: $('#ajaxCandidateSave').serialize(),
+                success: function (dat) {
+                    // alert("Success");
+                    
+                    updateGrid();
+                },
+                error: function () {
+                    alert('Ajax call for Saving Candidate failed');
+                },
+            });
+        }
+
+        function updateGrid() {
+           
+            var grid = $('#CandidateGrid').data('kendoGrid');
+            if (grid === undefined || grid == null) {
+                alert("Houston, we have a problem");
+            } else {
+
+                var fn = $('#FirstName').val();
+                var ln = $('#LastName').val();
+                var email = $('#Email').val();
+                var phone = $('#Phone').val();
+                
+                var datasource = grid.dataSource;
+                // Test this record
+                var newRecord = { FirstName: fn, LastName: ln, Phone: phone, Email: email };
+                datasource.insert(newRecord);
+               
+
+            }
+           // ClearCandidateInformation();
+
+        }
+
+        function ClearCandidateInformation() {
+            alert("Clearing");
+            $('#FirstName').val('');
+            $('#LastName').val('');
+            $('#Phone').val('');
+            $('#Email').val('');
+            $('#TypeOfQualifications.Type').val('');
+            $('#Qualifications_Name').val('');
+            $('#Qualifications_DateStarted').val('');
+            $('#Qualifications_DateEnded').val('');
+            // Fix radio button
+            $('#Qualifications_isCompleted').val('');
+
+
+
+        }
+
+        function onSearch() {
+            var q = $("#searchCandidateFN").val();
+            var grid = $("#CandidateGrid").data("kendoGrid");
+            grid.datasource.query({
+                page: 1,
+                pageSize: 20,
+                filter: {
+                    logic: "or",
+                    filters: [
+                        { field: "FirstName", operator: "contains", value: q },
+                        { field: "LastName", operator: "contains", value: q }
+                    ]
+                }
+            });
+        }
+
+        function onReady() {
+
+            $("#btnSearch").kendoButton({
+                click: onSearch
+            });
+
+
+
+        }
+
+    
+    </script>

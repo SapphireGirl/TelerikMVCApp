@@ -1,0 +1,122 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Cardno Colors*/
+.container > .navbar-header,
+.container > .navbar-collapse {
+    margin-right: -15px;
+    margin-left: -15px;
+    background-image: url('../Images/Cardno.jpg');
+}
+.navbar-inverse .navbar-brand {
+  color:  #ffffff;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.navbar .navbar-inverse .navbar-fixed-top {
+   
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #988F86;
+}
+.navbar-header {
+    background-color: #988f86;
+    
+}
+ul.nav.navbar-nav {
+    color: azure;
+}
+
+
+.cardno-navbar {
+    margin-right: -15px;
+    margin-left: -15px;
+    background-image: url('../Images/Cardno.jpg');
+    height: 100%;
+    opacity: 1;
+
+}
+
+.SearchBox {
+    font-size: 1.1em;
+    float: left; 
+    overflow: auto;
+    background-color: white;
+    padding: 15px; 
+    border: #94C0D2 solid thin;
+    
+    /*min-height: 500px;*/
+}
+.ui-corner-all {
+    border-radius: 15px;
+}
+.leftedge {
+    padding-left: 1em ;
+    padding-bottom: 1em;
+
+}
+
+.hide-horiz-scrollbar {
+        overflow-x: hidden;
+}
+.alignLeft {
+    text-align: left;
+}
+.alignRight {
+    text-align: right;
+}
+
+.incidentLabel {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: .9em;
+    vertical-align: middle;
+    margin-top: .4em;
+    padding: 0 0;
+}
+ 
+   
