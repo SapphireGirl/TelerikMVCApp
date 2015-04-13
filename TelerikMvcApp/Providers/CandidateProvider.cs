@@ -42,8 +42,8 @@ namespace TelerikMvcApp.Providers
                 Qualification = 
                     new Qualification
                     {
-                        Type = TypeOfQualifications.CollegeDegree,
-                        Name = "Bachelor Degree in Mathematics",
+                      //  QType = TypeOfQualifications.CollegeDegree,
+                        Description = "Bachelor Degree in Mathematics",
                         DateStarted = new DateTime(1991, 8, 15),
                         DateEnded = new DateTime(1995, 3, 24),
                         isCompleted = true

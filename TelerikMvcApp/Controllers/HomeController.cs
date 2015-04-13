@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,6 +8,7 @@ using System.Web.Razor.Text;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Microsoft.Ajax.Utilities;
+using TelerikMvcApp.DataAccess;
 using TelerikMvcApp.Models;
 using TelerikMvcApp.Providers;
 using TelerikMvcApp.ViewModels;
@@ -17,18 +19,27 @@ namespace TelerikMvcApp.Controllers
     {
         // TODO: Add Unity Container
         public CandidateProvider _candidateProvider { get; set; }
+        public CardnoContext _cardnoContext { get; set; }
 
         public HomeController()
         {
             _candidateProvider = new CandidateProvider();
+           
         }
 
         public ActionResult Index()
         {
 
-           // var vm = _candidateProvider.GetCandidateViewModel();
-
-            return View();
+            var vm = _candidateProvider.GetCandidateViewModel();
+            // Note:  Database will not automatically seed.
+            // Need to get the context and use it before it will actually seed.
+            // Can Seed the db by going to the Package Manager and use the Update-Database command.
+            // I think this is after the enable migrations = true is set in Configuration.cs and
+            // run the Enable-Migrations in Package manager too.
+            TestDB();
+            // Calling Context to run the seed
+           // SeedData();
+            return View(vm);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -158,6 +169,92 @@ namespace TelerikMvcApp.Controllers
             return Json(newList.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 #endregion
+
+        public void TestDB()
+        {
+            // Add a record
+
+            using (_cardnoContext = new CardnoContext())
+            {
+                //try
+                //{
+                //    // Candidates
+                //    _cardnoContext.Candidates.Add(new Candidate
+                //    {
+
+                        
+                //        FirstName = "Janine",
+                //        LastName = "Alires",
+                //        Phone = "555-1234",
+                //        Email = "Janie@gmail.com",
+                //        Address = new Address
+                //        {
+                //            StreetAddress = "1234 Happy Valley Road",
+                //            City = "Pleasant Hill",
+                //            Region = "California",
+                //            ZipCode = "11111"
+                //        },
+                //        Qualifications = new List<Qualification>
+                //        {
+                //            new Qualification
+                //            {
+                //                Description = "University Of California, Bachelor Degree",
+                //                DateStarted = new DateTime(1991, 08, 15),
+                //                DateEnded = new DateTime(1995, 03, 15),
+                                
+                //                isCompleted = true,
+                                
+                //               // QType = TypeOfQualifications.CollegeDegree
+                //            },
+                //            new Qualification
+                //            {
+                //                Description = "Pluralsight Certification: C#",
+                //                DateStarted = new DateTime(2013, 08, 15),
+                //                DateEnded = new DateTime(2013, 03, 15),
+                //                isCompleted = true,
+                                
+                //               // QType = TypeOfQualifications.CollegeDegree
+                //            },
+                //            new Qualification
+                //            {
+                //                Description = "PluralSight Certification: JavaScript",
+                //                DateStarted = new DateTime(2014, 12, 23),
+                //                DateEnded = new DateTime(2015, 03, 15),
+                //                isCompleted = false,
+                                
+                //               // QType = TypeOfQualifications.ProfessionCertification
+                //            }
+
+
+                //        }
+                //    });
+
+                    _cardnoContext.SaveChanges();
+                //}
+                //catch (Exception ex)
+                //{
+                //    var message = ex.Message;
+                //    Debug.WriteLine(ex.Message);
+                //}
+            }
+        }
+
+        public void SeedData()
+        {
+            try
+            {
+
+
+                _cardnoContext = new CardnoContext();
+                _cardnoContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                Debug.WriteLine(message);
+            }
+        }
 
     }
 }
