@@ -32,7 +32,7 @@ namespace TelerikMvcApp.DataAccess.Seeds
                 {
                     StreetAddress = "1234 Happy Valley Road",
                     City = "Katy",
-                    Region = "California",
+                    Region = "California",    
                     ZipCode = "11111"
                 },
                 Qualifications = new List<Qualification>

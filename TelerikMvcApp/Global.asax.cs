@@ -18,7 +18,8 @@ namespace TelerikMvcApp
         protected void Application_Start()
         {
             // Initialize DB
-            Database.SetInitializer(new InitializeDBWithSeedData());
+            // Not the best to put this here because it does not always get hit.
+           // Database.SetInitializer(new InitializeDBWithSeedData());
 
 
             AreaRegistration.RegisterAllAreas();

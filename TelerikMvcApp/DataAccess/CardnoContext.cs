@@ -16,7 +16,8 @@ namespace TelerikMvcApp.DataAccess
 
         public CardnoContext()
         {
-           // Database.SetInitializer(new InitializeDBWithSeedData());
+            Database.SetInitializer(new InitializeDBWithSeedData());
+            
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,6 +27,18 @@ namespace TelerikMvcApp.DataAccess
             modelBuilder.Configurations.Add(new CandidateMappings());
             modelBuilder.Configurations.Add(new QualificationsMappings());
 
+        }
+
+        public void Seed(CardnoContext context)
+        {
+#if DEBUG
+            // Create testing objects
+            var TestClass = new Candidate { FirstName = "Joline", LastName = "Duff", Email = "joline@123.com", DateEnteredSystem = DateTime.Now};
+
+            context.Candidates.Add(TestClass);
+
+            context.SaveChanges();
+#endif
         }
 
     }

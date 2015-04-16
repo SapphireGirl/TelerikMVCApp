@@ -176,66 +176,66 @@ namespace TelerikMvcApp.Controllers
 
             using (_cardnoContext = new CardnoContext())
             {
-                //try
-                //{
-                //    // Candidates
-                //    _cardnoContext.Candidates.Add(new Candidate
-                //    {
-
-                        
-                //        FirstName = "Janine",
-                //        LastName = "Alires",
-                //        Phone = "555-1234",
-                //        Email = "Janie@gmail.com",
-                //        Address = new Address
-                //        {
-                //            StreetAddress = "1234 Happy Valley Road",
-                //            City = "Pleasant Hill",
-                //            Region = "California",
-                //            ZipCode = "11111"
-                //        },
-                //        Qualifications = new List<Qualification>
-                //        {
-                //            new Qualification
-                //            {
-                //                Description = "University Of California, Bachelor Degree",
-                //                DateStarted = new DateTime(1991, 08, 15),
-                //                DateEnded = new DateTime(1995, 03, 15),
-                                
-                //                isCompleted = true,
-                                
-                //               // QType = TypeOfQualifications.CollegeDegree
-                //            },
-                //            new Qualification
-                //            {
-                //                Description = "Pluralsight Certification: C#",
-                //                DateStarted = new DateTime(2013, 08, 15),
-                //                DateEnded = new DateTime(2013, 03, 15),
-                //                isCompleted = true,
-                                
-                //               // QType = TypeOfQualifications.CollegeDegree
-                //            },
-                //            new Qualification
-                //            {
-                //                Description = "PluralSight Certification: JavaScript",
-                //                DateStarted = new DateTime(2014, 12, 23),
-                //                DateEnded = new DateTime(2015, 03, 15),
-                //                isCompleted = false,
-                                
-                //               // QType = TypeOfQualifications.ProfessionCertification
-                //            }
+                try
+                {
+                    // Candidates
+                    _cardnoContext.Candidates.Add(new Candidate
+                    {
 
 
-                //        }
-                //    });
+                        FirstName = "Janine",
+                        LastName = "Alires",
+                        Phone = "555-1234",
+                        Email = "Janie@gmail.com",
+                        Address = new Address
+                        {
+                            StreetAddress = "1234 Happy Valley Road",
+                            City = "Pleasant Hill",
+                            Region = "California",
+                            ZipCode = "11111"
+                        },
+                        Qualifications = new List<Qualification>
+                        {
+                            new Qualification
+                            {
+                                Description = "University Of California, Bachelor Degree",
+                                DateStarted = new DateTime(1991, 08, 15),
+                                DateEnded = new DateTime(1995, 03, 15),
+                                
+                                isCompleted = true,
+                                
+                               // QType = TypeOfQualifications.CollegeDegree
+                            },
+                            new Qualification
+                            {
+                                Description = "Pluralsight Certification: C#",
+                                DateStarted = new DateTime(2013, 08, 15),
+                                DateEnded = new DateTime(2013, 03, 15),
+                                isCompleted = true,
+                                
+                               // QType = TypeOfQualifications.CollegeDegree
+                            },
+                            new Qualification
+                            {
+                                Description = "PluralSight Certification: JavaScript",
+                                DateStarted = new DateTime(2014, 12, 23),
+                                DateEnded = new DateTime(2015, 03, 15),
+                                isCompleted = false,
+                                
+                               // QType = TypeOfQualifications.ProfessionCertification
+                            }
+
+
+                        }
+                    });
 
                     _cardnoContext.SaveChanges();
-                //}
-                //catch (Exception ex)
-                //{
-                //    var message = ex.Message;
-                //    Debug.WriteLine(ex.Message);
-                //}
+                }
+                catch (Exception ex)
+                {
+                    var message = ex.Message;
+                    Debug.WriteLine(ex.Message);
+                }
             }
         }
 

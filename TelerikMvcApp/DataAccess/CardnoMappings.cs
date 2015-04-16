@@ -31,6 +31,10 @@ namespace TelerikMvcApp.DataAccess
             Property(p => p.Email).
                 IsOptional().
                 HasMaxLength(250);
+
+            Property(p => p.TwitterHandle).
+                IsOptional().
+                HasMaxLength(250);
              //  HasColumnType("string");
 
             Property(p => p.Phone).

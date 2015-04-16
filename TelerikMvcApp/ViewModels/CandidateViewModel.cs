@@ -30,6 +30,9 @@ namespace TelerikMvcApp.ViewModels
         [Required(ErrorMessage = "The phone number is required")]
         public string Phone { get; set; }
 
+        [Display(Name = "Tweet Me @: ")]
+        public string TwitterHandle { get; set; }
+
         public Address Address { get; set; }
 
         

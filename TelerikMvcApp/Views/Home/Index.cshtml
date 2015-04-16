@@ -42,6 +42,13 @@
                     </div>
                 </div>
                 <div id="Row5" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="leftedge">
+                        @Html.LabelFor(m => m.TwitterHandle)
+                        @Html.TextBoxFor(m => m.TwitterHandle)
+                        
+                    </div>
+                </div>
+                <div id="Row6" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
                     &nbsp;&nbsp;&nbsp; Qualifications:
@@ -55,13 +62,13 @@
 
                         )
                     </div>
-                    <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="Row7" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="leftedge">Start Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.TextBoxFor(m => m.Qualification.DateStarted)</div>
                     </div>
-                    <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="Row8" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="leftedge">End Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.TextBoxFor(m => m.Qualification.DateEnded)</div>
                     </div>
-                    <div id="Row4" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div id="Row9" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="leftedge">
                             Was this Completed? True: @Html.RadioButtonFor(m => m.Qualification.isCompleted, true, new { @class = "k-checkbox" })
                             False:     @Html.RadioButtonFor(m => m.Qualification.isCompleted, false, new { @class = "k-checkbox" })
